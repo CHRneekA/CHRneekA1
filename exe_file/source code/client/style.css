@@ -1,0 +1,400 @@
+body {
+    background-color: #000000;
+    margin: 0px;
+    overflow: hidden;
+}
+
+#note_list {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: overlay;
+    
+    position: relative;
+}
+
+.note {
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    position: absolute;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: hsla(0, 60%, 10%, 0.5);
+    border-color: hsl(0, 60%, 60%);
+    transition: transform 0.2s, opacity 0.2s, width 0.3s, height 0.3s;
+    transform: translate(-50%, 0%) scale(1);
+
+    user-select: none;
+    z-index: 0;
+}
+
+.note:hover {
+    transform: translate(-50%, 0%) scale(1.05);
+    cursor: pointer;
+}
+
+.note__hide {
+    transform: translate(-50%, 0%) scale(0);
+    z-index: -1;
+    opacity: 0;
+}
+
+.note:active {
+    transform: translate(-50%, 0%) scale(0.95);
+    opacity: 0.2;
+}
+
+.note__title {
+    margin: 20px;
+    font-size: 30px;
+
+    color: hsl(0, 75%, 50%);
+    font-family: "Lato", sans-serif;
+    text-align: center;
+    word-break: break-word;
+
+    font-weight: 900;
+}
+
+.note__title__cut {
+    min-height: 42px;
+
+    word-break: keep-all;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    overflow: hidden;
+}
+
+/* .note__title {
+    margin: 20px;
+
+    font-family: "Lato", sans-serif;
+    text-align: center;
+    white-space: nowrap;
+
+    font-weight: 900;
+
+    background-image: -webkit-linear-gradient(0deg,
+    hsla(0, 75%, 50%, 0) 2.5%,
+    hsl(0, 75%, 50%) 5%,
+    hsl(0, 75%, 50%) 95%,
+    hsla(0, 75%, 50%, 0) 97.5%
+    );
+    text-overflow: fade;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+} */
+
+.note__text {
+    margin: 0px 20px;
+    min-height: 0;
+    
+    font-family: "Lato", sans-serif;
+    text-align: center;
+    word-break: break-word;
+
+    background-image: -webkit-linear-gradient(90deg, hsla(0, 60%, 55%, 0) 2.5%, hsl(0, 60%, 55%) 15%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#new_note_button {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+
+    background-image: url(./assets/add.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+#change_format {
+    position: absolute;
+    bottom: 140px;
+    left: 40px;
+
+    background-image: url(./assets/format.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.button_circle {
+
+    width: 90px;
+    height: 90px;
+    
+    background-color: hsla(0, 0%, 10%, 0.5);
+    border-radius: 50%;
+    border: solid 5px hsl(0, 0%, 80%);
+    /* border-style: dashed; */
+
+    transition: transform 0.2s, opacity 0.2s;
+    
+    user-select: none;
+}
+
+#lower_pad {
+    position: absolute;
+    width: 100%;
+}
+
+.button_circle:hover {
+    background-color: hsla(0, 0%, 20%, 0.5);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.button_circle:active {
+    transform: scale(0.95);
+    opacity: 0.2;
+}
+
+.black_overlay {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+    width: 100%;
+    height: 100%;
+    
+    opacity: 1;
+
+    background-color: hsla(0, 0%, 0%, 0.8);
+    transition: opacity 0.4s;
+}
+
+.black_overlay__hide {
+    opacity: 0;
+}
+
+.editor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: 500px;
+    height: 500px;
+
+    opacity: 1;
+
+    background-color: hsla(0, 0%, 10%, 0.9);
+    border-radius: 30px;
+    border: solid 5px hsl(0, 0%, 80%);
+
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.4s, opacity 0.4s;
+    
+    overflow: hidden;
+}
+
+.editor__hide {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+}
+
+.editor__box {
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    overflow-y: scroll;
+}
+
+.editor__toolbar {
+    padding: 10px;
+    max-height: fit-content;
+    
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    gap: 15px;
+}
+.editor__title_editor {
+    max-height: fit-content;
+    padding: 10px;
+
+    background-color: hsla(0, 0%, 20%, 0.5);
+    border-radius: 15px;
+
+    outline: none;
+
+    color: hsl(0, 0%, 80%);
+    font-family: "Lato", sans-serif;
+    text-align: center;
+    font-weight: 900;
+
+    border: none;
+
+    font-size: 40px;
+}
+.editor__text_editor {
+    max-height: fit-content;
+    padding: 10px;
+
+    background-color: hsla(0, 0%, 20%, 0.5);
+    border-radius: 15px;
+
+    outline: none;
+    
+    color: hsl(0, 0%, 65%);
+    font-family: "Lato", sans-serif;
+
+    font-size: 30px;
+}
+
+.color_slider {
+    --slider-color: hsl(240, 60%, 60%);
+
+    overflow: hidden;
+    width: 450px;
+    height: 30px;
+    appearance: none;
+    -webkit-appearance: none;
+
+    background-color: hsla(240, 60%, 60%, 0.5);
+    border-radius: 20px;
+    border: solid 5px hsl(240, 60%, 20%);
+    
+    box-sizing: border-box;
+
+    transition: transform 0.2s;
+
+    margin-top: 0px;
+    cursor: ew-resize;
+}
+
+.color_slider:hover {
+    transform: scale(1.05);
+}
+
+.color_slider::-webkit-slider-runnable-track {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 30px;
+}
+
+.color_slider::-webkit-slider-thumb {
+    width: 8px;
+    appearance: none;
+    -webkit-appearance: none;
+    margin-top: 0px;
+    height: 30px;
+    /* border-radius: 4px; */
+    background: var(--slider-color)
+}
+
+.button_rounded {
+    width: 90px;
+    height: 90px;
+
+    background-color: hsla(0, 0%, 10%, 0.5);
+    border-radius: 20px;
+    border: solid 5px hsl(0, 0%, 80%);
+    /* border-style: dashed; */
+
+    transition: transform 0.2s, opacity 0.2s;
+    
+    user-select: none;
+}
+
+.button_rounded:hover {
+    background-color: hsla(0, 0%, 20%, 0.5);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.button_rounded:active {
+    transform: scale(0.95);
+    opacity: 0.2;
+}
+
+.close_icon {
+    background-image: url(./assets/close.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.delete_icon {
+    background-image: url(./assets/delete.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.deletion_button {
+    position: absolute;
+    left: 115px;
+    top: 25px;
+    padding: 0px 40px;
+
+    width: fit-content;
+    height: 60px;
+
+    background-color: hsla(0, 60%, 10%, 0.5);
+    border-radius: 20px;
+    border: solid 5px hsl(0, 60%, 60%);
+    /* border-style: dashed; */
+
+    transition: transform 0.2s, opacity 0.2s;
+
+    color: hsl(0, 60%, 60%);
+    font-family: "Lato", sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    
+    user-select: none;
+    white-space: nowrap;
+}
+
+.deletion_button:hover {
+    background-color: hsla(0, 60%, 20%, 0.5);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.deletion_button:active {
+    transform: scale(0.95);
+    opacity: 0.2;
+}
+
+.deletion_button_hide {
+    transform: scale(0);
+    opacity: 0;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: hsla(0, 0%, 20%, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 200px 200px hsla(0, 0%, 60%, 0.9);
+    border: solid 5px transparent;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 200px 200px hsla(0, 0%, 70%, 0.9);
+    border: solid 4px transparent;
+}
